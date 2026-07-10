@@ -1,0 +1,1419 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kuźnia Rytmu – Szkoła Perkusyjna · Rzeszów i okolice</title>
+    <meta name="description" content="Kuźnia Rytmu — indywidualne lekcje perkusji dla dzieci, młodzieży i dorosłych. Rzeszów i okolice. Lekcja próbna gratis! Zapisy od września. Tel: 511 404 350" />
+    
+    <!-- Google Fonts CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Pure CSS in style block -->
+    <style>
+      :root {
+        --black: #1D1D1B;
+        --black-surface: #262624;
+        --black-mid: #333330;
+        --orange: #D65904;
+        --orange-light: #E87830;
+        --orange-dark: #A84503;
+        --white: #FFFFFF;
+        --off-white: #F5F3F0;
+        --muted: #8A8A85;
+        --border: #E0E0DC;
+        --border-dark: rgba(255,255,255,0.1);
+      }
+
+      /* RESET & BASE */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--white);
+        color: #4A4A48;
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        line-height: 1.72;
+        overflow-x: hidden;
+      }
+
+      /* TYPOGRAPHY */
+      h1, h2, h3, h4 {
+        margin: 0;
+      }
+
+      .h1-hero {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 400;
+        font-size: clamp(3rem, 8.5vw, 6.2rem);
+        letter-spacing: -0.01em;
+        line-height: 0.9;
+        text-transform: uppercase;
+        margin: 16px 0;
+        text-align: center;
+      }
+
+      .h2-section {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 800;
+        font-size: clamp(2rem, 4.5vw, 3.5rem);
+        letter-spacing: -0.01em;
+        color: var(--black);
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 1.1;
+      }
+
+      .section-label {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 600;
+        font-size: 0.75rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--orange);
+        text-align: center;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      /* SPACING & CONTAINERS */
+      .section-pad {
+        padding: 88px 0;
+        position: relative;
+      }
+
+      .container-width {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 24px;
+        width: 100%;
+      }
+
+      /* RHYTHMIC DECORATIVE SYSTEM */
+      .beat-divider {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 16px auto 28px auto;
+      }
+
+      .beat-divider.left-aligned {
+        justify-content: flex-start;
+        margin: 12px 0 20px 0;
+      }
+
+      .beat {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--border);
+        transition: all 0.2s ease;
+      }
+
+      .beat.active {
+        background-color: var(--orange);
+        width: 10px;
+        height: 10px;
+      }
+
+      /* Dark Section Overrides for Beat Dots */
+      .dark-section .beat {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      .dark-section .beat.active {
+        background-color: var(--orange);
+      }
+
+      /* Drumstick accent lines */
+      .drumstick-accent {
+        position: absolute;
+        width: 40px;
+        height: 2px;
+        background-color: var(--orange);
+        transform: rotate(-15deg);
+      }
+      .drumstick-accent.top-left {
+        top: 15px;
+        left: -10px;
+      }
+      .drumstick-accent.bottom-right {
+        bottom: 15px;
+        right: -10px;
+      }
+
+      /* Rhythm pulse texture background on dark sections */
+      .rhythm-texture {
+        background-image: radial-gradient(circle, rgba(214, 89, 4, 0.04) 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+
+      /* TOP ANNOUNCEMENT BAR */
+      .top-bar {
+        background-color: var(--orange);
+        padding: 10px 16px;
+        text-align: center;
+        position: relative;
+        z-index: 102;
+      }
+
+      .top-bar-text {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 700;
+        color: var(--white);
+        font-size: clamp(0.75rem, 2vw, 0.85rem);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        display: inline-block;
+      }
+
+      /* NAVIGATION BAR */
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background-color: rgba(29, 29, 27, 0.96);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 2px solid var(--orange);
+        transition: all 0.2s ease;
+      }
+
+      .navbar-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 72px;
+      }
+
+      .logo-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+      }
+
+      .logo-img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 2px solid var(--orange);
+        padding: 1px;
+        background-color: var(--white);
+        object-fit: cover;
+      }
+
+      .logo-text {
+        font-family: 'Archivo Black', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: -0.01em;
+      }
+
+      .logo-kuznia {
+        color: var(--white);
+      }
+
+      .logo-rytmu {
+        color: var(--orange);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .nav-item {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 600;
+        font-size: 0.85rem;
+        letter-spacing: 0.1em;
+        color: rgba(255, 255, 255, 0.65);
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: color 0.2s ease;
+      }
+
+      .nav-item:hover {
+        color: var(--orange);
+      }
+
+      .nav-cta-btn {
+        background-color: var(--orange);
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 700;
+        color: var(--white);
+        padding: 8px 20px;
+        border-radius: 100px;
+        font-size: 0.8rem;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: all 0.2s ease;
+      }
+
+      .nav-cta-btn:hover {
+        background-color: var(--orange-light);
+        transform: translateY(-1px);
+      }
+
+      /* CSS HAMBURGER SYSTEM */
+      .nav-cb {
+        display: none;
+      }
+
+      .nav-burger {
+        display: none;
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: var(--white);
+        user-select: none;
+        z-index: 101;
+        transition: color 0.2s ease;
+      }
+
+      /* HERO SECTION */
+      .hero-section {
+        background-color: var(--black);
+        min-height: calc(100vh - 108px); /* Account for topbar + navbar */
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .glow-circle {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        background: rgba(214, 89, 4, 0.14);
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .glow-1 {
+        top: -10%;
+        right: -10%;
+        width: 500px;
+        height: 500px;
+      }
+
+      .glow-2 {
+        bottom: -10%;
+        left: -10%;
+        width: 400px;
+        height: 400px;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 80px 24px;
+        text-align: center;
+      }
+
+      .hero-title-main {
+        display: block;
+      }
+
+      .hero-title-kuznia {
+        color: var(--white);
+        display: block;
+      }
+
+      .hero-title-rytmu {
+        color: var(--orange);
+        display: block;
+      }
+
+      .hero-sub {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 600;
+        color: var(--white);
+        font-size: clamp(1.2rem, 3vw, 1.8rem);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin: 16px 0 24px 0;
+        line-height: 1.2;
+      }
+
+      .hero-desc {
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 1.05rem;
+        max-width: 480px;
+        margin: 0 auto 36px auto;
+        line-height: 1.6;
+      }
+
+      .hero-chips-flex {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 44px;
+      }
+
+      .hero-chip {
+        background: rgba(214, 89, 4, 0.12);
+        border: 1px solid rgba(214, 89, 4, 0.35);
+        border-radius: 100px;
+        padding: 6px 16px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.82rem;
+        transition: all 0.2s ease;
+      }
+
+      .hero-chip:hover {
+        background: rgba(214, 89, 4, 0.2);
+        border-color: var(--orange);
+      }
+
+      .hero-buttons-flex {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+      }
+
+      .btn {
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 100px;
+        padding: 14px 32px;
+        font-family: 'Barlow Condensed', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+      }
+
+      .btn-primary {
+        background-color: var(--orange);
+        color: var(--white);
+        font-weight: 700;
+        box-shadow: 0 8px 28px rgba(214, 89, 4, 0.35);
+      }
+
+      .btn-primary:hover {
+        background-color: var(--orange-light);
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        border: 1.5px solid rgba(255, 255, 255, 0.25);
+        color: var(--white);
+        font-weight: 600;
+      }
+
+      .btn-secondary:hover {
+        border-color: rgba(255, 255, 255, 0.5);
+        background-color: rgba(255, 255, 255, 0.05);
+        transform: translateY(-2px);
+      }
+
+      /* ABOUT SECTION */
+      .about-section {
+        background-color: var(--white);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .about-grid {
+        display: flex;
+        gap: 72px;
+        align-items: center;
+      }
+
+      .about-left {
+        flex: 1.2;
+      }
+
+      .about-right {
+        flex: 1;
+      }
+
+      .about-heading {
+        color: var(--black);
+        margin-bottom: 12px;
+        text-align: left;
+      }
+
+      .about-rule {
+        border: none;
+        border-bottom: 3px solid var(--orange);
+        width: 56px;
+        margin: 14px 0 24px 0;
+      }
+
+      .about-p {
+        font-family: 'Inter', sans-serif;
+        color: #4A4A48;
+        font-size: 1rem;
+        line-height: 1.72;
+        margin-bottom: 18px;
+      }
+
+      .about-p:last-of-type {
+        margin-bottom: 28px;
+      }
+
+      .feature-list {
+        margin-top: 32px;
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: center;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .feature-item:last-child {
+        border-bottom: none;
+      }
+
+      .feature-item .beat.active {
+        margin-right: 12px;
+        flex-shrink: 0;
+      }
+
+      .feature-text {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 700;
+        color: var(--black);
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      /* Special Offer Card (About Right) */
+      .offer-card {
+        background-color: var(--black);
+        padding: 40px 36px;
+        border-radius: 4px;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--border-dark);
+      }
+
+      .offer-label {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 600;
+        color: var(--orange);
+        font-size: 0.72rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .offer-title {
+        font-family: 'Archivo Black', sans-serif;
+        color: var(--white);
+        font-size: 1.6rem;
+        margin: 14px 0 4px 0;
+        text-transform: uppercase;
+        line-height: 1.1;
+      }
+
+      .offer-price {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 800;
+        color: var(--orange);
+        font-size: 2.8rem;
+        line-height: 1;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+      }
+
+      .offer-divider {
+        border: none;
+        border-top: 1px solid var(--border-dark);
+        margin: 20px 0;
+      }
+
+      .offer-desc {
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+
+      .offer-btn {
+        display: inline-block;
+        background-color: var(--orange);
+        color: var(--white);
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-radius: 100px;
+        padding: 12px 28px;
+        text-decoration: none;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+        text-align: center;
+        width: fit-content;
+      }
+
+      .offer-btn:hover {
+        background-color: var(--orange-light);
+        transform: translateY(-2px);
+      }
+
+      /* DLA KOGO (Who it's for) SECTION */
+      .kogo-section {
+        background-color: var(--off-white);
+        border-top: 1px solid var(--border);
+      }
+
+      .kogo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 16px;
+        margin-top: 40px;
+      }
+
+      .kogo-card {
+        background-color: var(--white);
+        border: 1px solid var(--border);
+        border-top: 3px solid var(--orange);
+        padding: 28px 24px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .kogo-card:hover {
+        border-top-color: var(--orange-dark);
+        box-shadow: 0 8px 24px rgba(29, 29, 27, 0.08);
+        transform: translateY(-3px);
+      }
+
+      .kogo-icon {
+        font-size: 1.8rem;
+        margin-bottom: 12px;
+        display: block;
+      }
+
+      .kogo-title {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 700;
+        color: var(--black);
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        line-height: 1.2;
+      }
+
+      .kogo-desc {
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        color: var(--muted);
+        font-size: 0.875rem;
+        line-height: 1.6;
+      }
+
+      /* LOKALIZACJE SECTION */
+      .loc-section {
+        background-color: var(--black);
+      }
+
+      .loc-heading {
+        color: var(--white);
+      }
+
+      .loc-tagline {
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.5);
+        text-align: center;
+        max-width: 500px;
+        margin: 0 auto;
+        font-size: 0.95rem;
+      }
+
+      .loc-chips-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 36px;
+      }
+
+      .loc-chip {
+        background-color: rgba(214, 89, 4, 0.1);
+        border: 1px solid rgba(214, 89, 4, 0.3);
+        border-radius: 100px;
+        padding: 10px 22px;
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 600;
+        color: var(--white);
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: all 0.2s ease;
+        text-decoration: none;
+      }
+
+      .loc-chip:hover {
+        background-color: rgba(214, 89, 4, 0.25);
+        border-color: var(--orange);
+        transform: scale(1.03);
+      }
+
+      .loc-chip.highlight {
+        background-color: var(--orange);
+        border-color: var(--orange);
+        font-weight: 700;
+        padding: 12px 26px;
+        font-size: 1.05rem;
+      }
+
+      .loc-chip.highlight:hover {
+        background-color: var(--orange-light);
+        border-color: var(--orange-light);
+      }
+
+      .loc-footnote {
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.4);
+        text-align: center;
+        margin-top: 28px;
+        font-style: italic;
+        font-size: 0.85rem;
+      }
+
+      /* CONTACT / SIGNUP SECTION */
+      .contact-section {
+        background-color: var(--white);
+        border-top: 1px solid var(--border);
+      }
+
+      .contact-tagline {
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        color: var(--muted);
+        text-align: center;
+        font-size: 1rem;
+        margin-bottom: 40px;
+      }
+
+      .contact-grid {
+        display: flex;
+        gap: 64px;
+        max-width: 900px;
+        margin: 0 auto;
+        align-items: stretch;
+      }
+
+      .contact-left {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .contact-p {
+        font-family: 'Inter', sans-serif;
+        color: #4A4A48;
+        font-size: 1rem;
+        line-height: 1.72;
+        margin-bottom: 24px;
+      }
+
+      .contact-row {
+        border-bottom: 1px solid var(--border);
+        padding: 16px 0;
+      }
+
+      .contact-row:last-child {
+        border-bottom: none;
+      }
+
+      .contact-row-label {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 600;
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+
+      .contact-row-value {
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        color: var(--black);
+        font-size: 1rem;
+      }
+
+      .contact-row-value.phone {
+        font-family: 'Archivo Black', sans-serif;
+        font-size: 1.1rem;
+        letter-spacing: -0.01em;
+      }
+
+      .contact-link {
+        color: var(--black);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .contact-link:hover {
+        color: var(--orange);
+      }
+
+      .contact-link-highlight {
+        color: var(--orange);
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .contact-link-highlight:hover {
+        color: var(--orange-light);
+      }
+
+      .contact-right {
+        flex: 1;
+        display: flex;
+      }
+
+      /* Signup Card (Contact Right) */
+      .signup-card {
+        background-color: var(--black);
+        border-radius: 4px;
+        padding: 40px 32px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--border-dark);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+
+      .signup-gratis {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 400;
+        color: var(--orange);
+        font-size: 1.6rem;
+        margin-bottom: 12px;
+        letter-spacing: -0.01em;
+      }
+
+      .signup-title {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 700;
+        color: var(--white);
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+        letter-spacing: 0.05em;
+      }
+
+      .signup-btn {
+        display: inline-block;
+        background-color: var(--orange);
+        color: var(--white);
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 800;
+        font-size: 1.05rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-radius: 100px;
+        padding: 16px 36px;
+        text-decoration: none;
+        width: 100%;
+        transition: all 0.2s ease;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 8px 28px rgba(214, 89, 4, 0.4);
+      }
+
+      .signup-btn:hover {
+        background-color: var(--orange-light);
+        transform: translateY(-2px);
+      }
+
+      .signup-sub {
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 0.8rem;
+        margin-top: 16px;
+      }
+
+      /* FOOTER */
+      .footer {
+        background-color: var(--black);
+        border-top: 2px solid var(--orange);
+        padding: 32px 0;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .footer-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+      }
+
+      .footer-logo-img {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 2px solid var(--orange);
+        padding: 1px;
+        background-color: var(--white);
+        object-fit: cover;
+      }
+
+      .footer-logo-text {
+        font-family: 'Archivo Black', sans-serif;
+        color: var(--white);
+        font-size: 0.95rem;
+        font-weight: 400;
+      }
+
+      .footer-tagline {
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.3);
+        font-size: 0.8rem;
+      }
+
+      .footer-copy {
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.15);
+        font-size: 0.75rem;
+      }
+
+      .footer-divider {
+        border: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
+        margin: 16px 0;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.18);
+        font-size: 0.78rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .footer-bottom-link {
+        color: rgba(255, 255, 255, 0.18);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .footer-bottom-link:hover {
+        color: var(--orange);
+      }
+
+      /* MEDIA QUERIES */
+      @media (max-width: 900px) {
+        .about-grid {
+          gap: 40px;
+        }
+        .contact-grid {
+          gap: 40px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .section-pad {
+          padding: 64px 0;
+        }
+
+        /* Nav Hamburger Mode */
+        .nav-burger {
+          display: block;
+        }
+
+        .nav-links {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100vh;
+          background-color: var(--black);
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 32px;
+          z-index: 99;
+          padding: 40px;
+        }
+
+        .nav-cb:checked ~ .nav-links {
+          display: flex;
+        }
+
+        .nav-burger::before {
+          content: "≡";
+        }
+
+        .nav-cb:checked ~ .nav-burger::before {
+          content: "✕";
+        }
+
+        .nav-links .nav-item {
+          font-size: 1.2rem;
+        }
+
+        .nav-links .nav-cta-btn {
+          font-size: 1.1rem;
+          padding: 12px 32px;
+        }
+
+        /* Hero Changes */
+        .hero-section {
+          min-height: auto;
+        }
+        .hero-content {
+          padding: 60px 16px;
+        }
+        .glow-circle {
+          transform: scale(0.6);
+        }
+        .hero-chips-flex {
+          gap: 8px;
+        }
+        .hero-chip {
+          padding: 5px 12px;
+          font-size: 0.78rem;
+        }
+
+        /* About Changes */
+        .about-grid {
+          flex-direction: column;
+          gap: 48px;
+        }
+        .about-left, .about-right {
+          width: 100%;
+        }
+        .offer-card {
+          max-width: 500px;
+          margin: 0 auto;
+        }
+
+        /* Dla Kogo Changes */
+        .kogo-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        /* Locations Changes */
+        .loc-chips-grid {
+          gap: 8px;
+        }
+        .loc-chip {
+          padding: 8px 18px;
+          font-size: 0.85rem;
+        }
+        .loc-chip.highlight {
+          padding: 10px 22px;
+          font-size: 0.95rem;
+        }
+
+        /* Contact Changes */
+        .contact-grid {
+          flex-direction: column;
+          gap: 48px;
+        }
+        .contact-left, .contact-right {
+          width: 100%;
+        }
+        .signup-card {
+          max-width: 500px;
+          margin: 0 auto;
+        }
+
+        /* Footer Changes */
+        .footer-top {
+          flex-direction: column;
+          text-align: center;
+          gap: 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .kogo-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-buttons-flex {
+          flex-direction: column;
+          align-items: stretch;
+          width: 100%;
+          max-width: 320px;
+          margin: 0 auto;
+        }
+        .btn {
+          text-align: center;
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- 2. TOP BAR -->
+    <div class="top-bar">
+      <div class="top-bar-text">
+        LEKCJA PRÓBNA GRATIS &middot; ZAPISY OD WRZEŚNIA 2026 &middot; RZESZÓW I OKOLICE
+      </div>
+    </div>
+
+    <!-- 3. NAVIGATION -->
+    <header class="navbar">
+      <div class="container-width navbar-container">
+        <!-- Logo -->
+        <a href="#" class="logo-link" id="nav-logo">
+          <img src="https://i.ibb.co/1tD9bzSr/703450708-122104661030629989-5652523326278025719-n.jpg" alt="Kuźnia Rytmu" class="logo-img" />
+          <div class="logo-text">
+            <span class="logo-kuznia">KUŹNIA</span><span class="logo-rytmu">RYTMU</span>
+          </div>
+        </a>
+
+        <!-- Hamburger Menu Toggle -->
+        <input type="checkbox" id="nav-open" class="nav-cb" />
+        <label for="nav-open" class="nav-burger" id="burger-label"></label>
+
+        <!-- Navigation Links & CTA -->
+        <nav class="nav-links" id="menu-links">
+          <!-- Small scriptless workaround: when a link is clicked, the checkbox unchecks. 
+               This can be done purely by putting a click overlay or simple page refresh anchors. 
+               Since it's pure HTML, linking to section IDs triggers navigation smoothly! -->
+          <a href="#about" class="nav-item">O Szkole</a>
+          <a href="#who-it-is-for" class="nav-item">Dla Kogo</a>
+          <a href="#locations" class="nav-item">Lokalizacje</a>
+          <a href="#contact" class="nav-item">Kontakt</a>
+          <a href="#contact" class="nav-cta-btn">Zapisz Się</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- 4. HERO SECTION -->
+    <section class="hero-section rhythm-texture dark-section">
+      <!-- Glow circles -->
+      <div class="glow-circle glow-1"></div>
+      <div class="glow-circle glow-2"></div>
+
+      <div class="hero-content">
+        <!-- Section label -->
+        <span class="section-label" id="hero-lbl">Rzeszów i okolice</span>
+        
+        <!-- Beat dots divider -->
+        <div class="beat-divider" id="hero-divider">
+          <span class="beat"></span>
+          <span class="beat"></span>
+          <span class="beat active"></span>
+          <span class="beat"></span>
+        </div>
+
+        <!-- Hero Heading -->
+        <h1 class="h1-hero" id="hero-h1">
+          <span class="hero-title-kuznia">Kuźnia</span>
+          <span class="hero-title-rytmu">Rytmu</span>
+        </h1>
+
+        <!-- Subheading -->
+        <div class="hero-sub" id="hero-tagline">W KUŹNI KAŻDY MOŻE ZŁAPAĆ SWÓJ RYTM</div>
+
+        <!-- Description -->
+        <p class="hero-desc" id="hero-text">
+          Indywidualne lekcje perkusji dla dzieci, młodzieży i dorosłych. Zapisy od września!
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="hero-buttons-flex" id="hero-ctas">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdz8dFmnc4V1Ql70QVi1ESxo3u4di8WnibH1qrC4qkj9Gw_tg/viewform" target="_blank" class="btn btn-primary" id="hero-primary-btn">ZAPISZ SIĘ NA LEKCJĘ</a>
+          <a href="tel:511404350" class="btn btn-secondary" id="hero-secondary-btn">ZADZWOŃ: 511 404 350</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. ABOUT SECTION -->
+    <section class="section-pad about-section" id="about">
+      <div class="container-width">
+        <div class="about-grid">
+          <!-- Left Column: Story -->
+          <div class="about-left" id="about-info">
+            <span class="section-label">O Szkole</span>
+            
+            <!-- Left-aligned beat dots divider (1st active) -->
+            <div class="beat-divider left-aligned">
+              <span class="beat active"></span>
+              <span class="beat"></span>
+              <span class="beat"></span>
+              <span class="beat"></span>
+            </div>
+
+            <h2 class="h2-section about-heading" id="about-h2">Cześć! Rzeszów i okolice!</h2>
+            <hr class="about-rule" />
+
+            <p class="about-p">
+              Od września ruszają zapisy do Kuźni Rytmu — szkoły perkusyjnej dla dzieci, młodzieży i dorosłych.
+            </p>
+            <p class="about-p">
+              Jeśli zawsze chciałeś spróbować gry na perkusji, szukasz nowej zajawki dla dziecka, chcesz wrócić do muzyki po latach albo po prostu złapać trochę rytmu i dobrej energii — jesteś w dobrym miejscu.
+            </p>
+
+            <!-- Feature rows with beat dot bullets -->
+            <div class="feature-list" id="about-features">
+              <div class="feature-item">
+                <span class="beat active"></span>
+                <span class="feature-text">LUŹNA ATMOSFERA</span>
+              </div>
+              <div class="feature-item">
+                <span class="beat active"></span>
+                <span class="feature-text">INDYWIDUALNE PODEJŚCIE</span>
+              </div>
+              <div class="feature-item">
+                <span class="beat active"></span>
+                <span class="feature-text">NAUKA KROK PO KROKU</span>
+              </div>
+              <div class="feature-item">
+                <span class="beat active"></span>
+                <span class="feature-text">GRANIE MUZYKI, KTÓRĄ NAPRAWDĘ LUBISZ</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Card -->
+          <div class="about-right" id="about-card-wrapper">
+            <div class="offer-card" id="special-offer-card">
+              <!-- Drumstick Corner Accents -->
+              <div class="drumstick-accent top-left"></div>
+              <div class="drumstick-accent bottom-right"></div>
+
+              <span class="offer-label">OFERTA SPECJALNA</span>
+              <h3 class="offer-title">LEKCJA PRÓBNA</h3>
+              <div class="offer-price">GRATIS</div>
+              <hr class="offer-divider" />
+              <p class="offer-desc">
+                Bez zobowiązań — sprawdź czy perkusja to coś dla Ciebie.
+              </p>
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSdz8dFmnc4V1Ql70QVi1ESxo3u4di8WnibH1qrC4qkj9Gw_tg/viewform" target="_blank" class="offer-btn" id="offer-signup-btn">ZAPISZ SIĘ</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. DLA KOGO SECTION -->
+    <section class="section-pad kogo-section" id="who-it-is-for">
+      <div class="container-width">
+        <span class="section-label">DLA KOGO</span>
+        
+        <!-- Beat dots divider (2nd active) -->
+        <div class="beat-divider" id="kogo-divider">
+          <span class="beat"></span>
+          <span class="beat active"></span>
+          <span class="beat"></span>
+          <span class="beat"></span>
+        </div>
+
+        <h2 class="h2-section" id="kogo-h2">Jesteś w dobrym miejscu, jeśli...</h2>
+
+        <div class="kogo-grid" id="kogo-cards">
+          <!-- Card 1 -->
+          <div class="kogo-card" id="kogo-card-1">
+            <h3 class="kogo-title">Zawsze chciałeś spróbować</h3>
+            <p class="kogo-desc">Gry na perkusji — teraz jest dobry moment, żeby zacząć.</p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="kogo-card" id="kogo-card-2">
+            <h3 class="kogo-title">Szukasz zajawki dla dziecka</h3>
+            <p class="kogo-desc">Nowe hobby, które rozwija rytm, koncentrację i pewność siebie.</p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="kogo-card" id="kogo-card-3">
+            <h3 class="kogo-title">Wracasz do muzyki</h3>
+            <p class="kogo-desc">Po latach przerwy? Zaczynamy tam, gdzie jesteś — bez presji.</p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="kogo-card" id="kogo-card-4">
+            <h3 class="kogo-title">Chcesz złapać rytm</h3>
+            <p class="kogo-desc">I dobrą energię — czasem to wystarczający powód.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. LOKALIZACJE SECTION -->
+    <section class="section-pad loc-section rhythm-texture dark-section" id="locations">
+      <div class="container-width">
+        <span class="section-label">OBSZAR DZIAŁANIA</span>
+        
+        <!-- Beat dots divider (4th active) -->
+        <div class="beat-divider" id="loc-divider">
+          <span class="beat"></span>
+          <span class="beat"></span>
+          <span class="beat"></span>
+          <span class="beat active"></span>
+        </div>
+
+        <h2 class="h2-section loc-heading" id="loc-h2">Gdzie nas znajdziesz</h2>
+        <p class="loc-tagline" id="loc-sub">
+          Lekcje odbywają się w Rzeszowie i okolicznych miejscowościach
+        </p>
+
+        <!-- Location Chips Grid -->
+        <div class="loc-chips-grid" id="loc-chips">
+          <a href="#contact" class="loc-chip">Malawa</a>
+          <a href="#contact" class="loc-chip">Boguchwała</a>
+          <a href="#contact" class="loc-chip highlight">Rzeszów</a>
+          <a href="#contact" class="loc-chip">Głogów Małopolski</a>
+          <a href="#contact" class="loc-chip">Krasne</a>
+          <a href="#contact" class="loc-chip">Łańcut</a>
+          <a href="#contact" class="loc-chip">Jasionka</a>
+          <a href="#contact" class="loc-chip">Tyczyn</a>
+        </div>
+
+        <p class="loc-footnote" id="loc-note">Nie widzisz swojej miejscowości? Napisz — może dojedziemy!</p>
+      </div>
+    </section>
+
+    <!-- 8. CONTACT / SIGNUP SECTION -->
+    <section class="section-pad contact-section" id="contact">
+      <div class="container-width">
+        <span class="section-label">ZAPISY</span>
+        
+        <!-- Beat dots divider (3rd active) -->
+        <div class="beat-divider" id="contact-divider">
+          <span class="beat"></span>
+          <span class="beat"></span>
+          <span class="beat active"></span>
+          <span class="beat"></span>
+        </div>
+
+        <h2 class="h2-section" id="contact-h2">Złap swój rytm już dziś.</h2>
+        <p class="contact-tagline" id="contact-sub">Zapisy od września 2026 &middot; Lekcja próbna gratis</p>
+
+        <div class="contact-grid">
+          <!-- Left Column: Contact details -->
+          <div class="contact-left" id="contact-details">
+            <p class="contact-p">
+              Jeśli masz pytania — śmiało napisz priv. Chętnie opowiemy więcej o zajęciach i pomożemy dobrać odpowiedni termin.
+            </p>
+
+            <div class="contact-row" id="contact-row-phone">
+              <div class="contact-row-label">TELEFON</div>
+              <div class="contact-row-value phone">
+                <a href="tel:511404350" class="contact-link">511 404 350</a>
+              </div>
+            </div>
+
+            <div class="contact-row" id="contact-row-email">
+              <div class="contact-row-label">E-MAIL</div>
+              <div class="contact-row-value">
+                <a href="mailto:kontakt@kuzniarytmu.pl" class="contact-link">kontakt@kuzniarytmu.pl</a>
+              </div>
+            </div>
+
+            <div class="contact-row" id="contact-row-facebook">
+              <div class="contact-row-label">FACEBOOK</div>
+              <div class="contact-row-value">
+                <a href="https://www.facebook.com/kuzniarytmu" target="_blank" class="contact-link-highlight">Kuźnia Rytmu &rarr;</a>
+              </div>
+            </div>
+
+            <div class="contact-row" id="contact-row-instagram">
+              <div class="contact-row-label">INSTAGRAM</div>
+              <div class="contact-row-value">
+                <a href="https://www.instagram.com/kuznia_rytmu_szkola_perkusyjna" target="_blank" class="contact-link-highlight">kuznia_rytmu_szkola_perkusyjna &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: CTA card -->
+          <div class="contact-right" id="signup-card-wrapper">
+            <div class="signup-card" id="signup-cta-card">
+              <!-- Drumstick Corner Accents -->
+              <div class="drumstick-accent top-left"></div>
+              <div class="drumstick-accent bottom-right"></div>
+
+              <div class="signup-gratis">GRATIS</div>
+              <div class="signup-title">PIERWSZA LEKCJA PRÓBNA</div>
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSdz8dFmnc4V1Ql70QVi1ESxo3u4di8WnibH1qrC4qkj9Gw_tg/viewform" target="_blank" class="signup-btn" id="signup-primary-btn">ZAPISZ SIĘ TERAZ</a>
+              <p class="signup-sub">Formularz zgłoszeniowy — zapisy od września 2026</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. FOOTER -->
+    <footer class="footer">
+      <div class="container-width">
+        <!-- Top Row -->
+        <div class="footer-top" id="footer-branding">
+          <a href="#" class="footer-logo">
+            <img src="https://i.ibb.co/1tD9bzSr/703450708-122104661030629989-5652523326278025719-n.jpg" alt="Kuźnia Rytmu" class="footer-logo-img" />
+            <span class="footer-logo-text">KUŹNIA RYTMU</span>
+          </a>
+          <div class="footer-tagline">Rzeszów i okolice</div>
+          <div class="footer-copy">&copy; 2026</div>
+        </div>
+
+        <!-- Divider line -->
+        <hr class="footer-divider" />
+
+        <!-- Bottom Row (Action links) -->
+        <div class="footer-bottom" id="footer-navigation">
+          <a href="tel:511404350" class="footer-bottom-link">511 404 350</a>
+          <span>&middot;</span>
+          <a href="mailto:kontakt@kuzniarytmu.pl" class="footer-bottom-link">kontakt@kuzniarytmu.pl</a>
+          <span>&middot;</span>
+          <a href="https://www.facebook.com/kuzniarytmu" target="_blank" class="footer-bottom-link">Facebook</a>
+          <span>&middot;</span>
+          <a href="https://www.instagram.com/kuznia_rytmu_szkola_perkusyjna" target="_blank" class="footer-bottom-link">Instagram</a>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>

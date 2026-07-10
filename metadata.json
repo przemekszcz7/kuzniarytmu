@@ -1,0 +1,6 @@
+{
+  "name": "Kuźnia Rytmu",
+  "description": "Kuźnia Rytmu — indywidualne lekcje perkusji dla dzieci, młodzieży i dorosłych. Rzeszów i okolice. Lekcja próbna gratis! Zapisy od września.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
